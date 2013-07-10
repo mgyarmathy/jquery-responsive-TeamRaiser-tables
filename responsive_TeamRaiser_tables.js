@@ -1,10 +1,10 @@
-/*	
-*	responsive_TeamRaiser_tables.js
-*	Author: Michael Gyarmathy, Web Developer Intern, Blackbaud
-*	Date: July 10, 2013
-*	Description: uses DOM traversal to extract information from a TR table and generate a new table with a responsive DIV format. 
-*	             also sorts table entries by amount raised. (requires jQuery)
-*	             example here: http://site.wish.org/site/TR?team_id=1011&fr_id=1041&pg=team
+/*    
+*    responsive_TeamRaiser_tables.js
+*    Author: Michael Gyarmathy, Web Developer Intern, Blackbaud
+*    Date: July 10, 2013
+*    Description: uses DOM traversal to extract information from a TR table and generate a new table with a responsive DIV format. 
+*                 also sorts table entries by amount raised. (requires jQuery)
+*                 example here: http://site.wish.org/site/TR?team_id=1011&fr_id=1041&pg=team
 */
 
 (function($) { 
@@ -38,15 +38,15 @@
     $('table.tr_roster tbody').find('tr').each(function(i, element) { 
         var n = $(element).find('td')[0].innerHTML;
         var amt = $(element).find('td')[1].innerHTML;
-        records.push({	name: n.substring(3,n.length-2), 
-                        amount_str: amt.substring(0,amt.length-3) , 
-                        amount_num: parseFloat(amt.substring(1,amt.length)) 
+        records.push({ name: n.substring(3,n.length-2), 
+                       amount_str: amt.substring(0,amt.length-3) , 
+                       amount_num: parseFloat(amt.substring(1,amt.length)) 
                     });
     });
 
     // sort records
     records.sort(function(a,b) {return (b.amount_num - a.amount_num)} );
-	
+    
     // add sorted records to the table
     $(records).each(function(i, element) {
         $('#teamRosterTable').append( '<div class="tableRow">'
@@ -81,20 +81,20 @@
     // assign captain designations
     var captains = [];
     $('td.tr_captain a').each(function(i, element) {
-		captains.push($(element).html());
+        captains.push($(element).html());
     });
     $(captains).each(function(i, name) {
-		$('.tableItem.teamMember .itemContent a').each(function(j, element) {
-			if(element.innerHTML == name){
-				$(element).parent().parent().parent().find('.tableItem.achievements .itemContent')
-						  .prepend('<img src="http://site.wish.org/images/friendraiser/yellow_star.gif" title="Team Captain" />');
-				return false;
-			}
-		});
+        $('.tableItem.teamMember .itemContent a').each(function(j, element) {
+            if(element.innerHTML == name){
+                $(element).parent().parent().parent().find('.tableItem.achievements .itemContent')
+                          .prepend('<img src="http://site.wish.org/images/friendraiser/yellow_star.gif" title="Team Captain" />');
+                return false;
+            }
+        });
     });
-	
-	// hide achievement images from teamMember column
-	$('#teamRosterTable div.teamMember img').hide();
-	
+    
+    // hide achievement images from teamMember column
+    $('#teamRosterTable div.teamMember img').hide();
+    
   });
 })(jQuery);
