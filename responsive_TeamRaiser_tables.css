@@ -1,9 +1,9 @@
-#teamRoster{
+#teamRoster {
    background-color: rgb(242,251,254);
    padding-bottom: 20px;
 }
 
-#teamRosterTable{
+#teamRosterTable {
    width: 100%;
    margin-left: auto;
    margin-right: auto;
@@ -11,16 +11,16 @@
    font-size: 13px;
 }
 
-.tableHeading{
+.tableHeading {
    font-weight: bold;
    color: #4C4C4C;
 }
 
-.itemContent{
+.itemContent {
    padding: 16px;
 }
 
-.itemContent img{
+.itemContent img {
    display: inline;
    vertical-align: middle;
    padding-right: 16px;
@@ -28,39 +28,39 @@
    width: 26px;
 }
 
-.tableItem.teamMember{
+.tableItem.teamMember {
    width: 30%;
    display: inline-block;
 }
 
-.tableItem.teamMember a{
+.tableItem.teamMember a {
    color: rgb(0,153,215);
 }
 
-.tableItem.achievements{
+.tableItem.achievements {
    width: 22%;
    display: inline-block;
    border-left: 1px solid #FFFFFF;
 }
 
-.tableItem.achievements .itemContent{
+.tableItem.achievements .itemContent {
    padding-left: 26px;
 }
 
-.tableItem.raised{
+.tableItem.raised {
    width: 22%;
    display: inline-block;
    border-left: 1px solid #FFFFFF;
 }
 
-.tableItem.donate{
+.tableItem.donate {
    width: 25%;
    display: inline-block;
    border-left: 1px solid #FFFFFF;
    text-align: center;
 }
 
-.tableItem.donate .itemContent button{
+.tableItem.donate .itemContent button {
    width: 102px;
    height: 31px;
    vertical-align: middle;
