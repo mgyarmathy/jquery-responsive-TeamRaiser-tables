@@ -1,0 +1,150 @@
+#teamRoster{
+   background-color: rgb(242,251,254);
+   padding-bottom: 20px;
+}
+
+#teamRosterTable{
+   width: 100%;
+   margin-left: auto;
+   margin-right: auto;
+   border: 1px solid #D0D9E0;
+   font-size: 13px;
+}
+
+.tableHeading{
+   font-weight: bold;
+   color: #4C4C4C;
+}
+
+.itemContent{
+   padding: 16px;
+}
+
+.itemContent img{
+   display: inline;
+   vertical-align: middle;
+   padding-right: 16px;
+   height: 26px;
+   width: 26px;
+}
+
+.tableItem.teamMember{
+   width: 30%;
+   display: inline-block;
+}
+
+.tableItem.teamMember a{
+   color: rgb(0,153,215);
+}
+
+.tableItem.achievements{
+   width: 22%;
+   display: inline-block;
+   border-left: 1px solid #FFFFFF;
+}
+
+.tableItem.achievements .itemContent{
+   padding-left: 26px;
+}
+
+.tableItem.raised{
+   width: 22%;
+   display: inline-block;
+   border-left: 1px solid #FFFFFF;
+}
+
+.tableItem.donate{
+   width: 25%;
+   display: inline-block;
+   border-left: 1px solid #FFFFFF;
+   text-align: center;
+}
+
+.tableItem.donate .itemContent button{
+   width: 102px;
+   height: 31px;
+   vertical-align: middle;
+   color: #FFFFFF;
+   border: none;
+   border-radius: 2px;
+   background: rgb(21,156,198); /*old browsers*/
+   background-image: linear-gradient(bottom, rgb(10,147,188) 14%, rgb(23,159,201) 56%, rgb(31,168,209) 78%);
+   background-image: -o-linear-gradient(bottom, rgb(10,147,188) 14%, rgb(23,159,201) 56%, rgb(31,168,209) 78%);
+   background-image: -moz-linear-gradient(bottom, rgb(10,147,188) 14%, rgb(23,159,201) 56%, rgb(31,168,209) 78%);
+   background-image: -webkit-linear-gradient(bottom, rgb(10,147,188) 14%, rgb(23,159,201) 56%, rgb(31,168,209) 78%);
+   background-image: -ms-linear-gradient(bottom, rgb(10,147,188) 14%, rgb(23,159,201) 56%, rgb(31,168,209) 78%);
+
+   background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.14, rgb(10,147,188)),
+	color-stop(0.56, rgb(23,159,201)),
+	color-stop(0.78, rgb(31,168,209))
+   );
+}
+
+.tableItem.donate .itemContent button:active{
+   background-image: linear-gradient(bottom, rgb(10,147,188) 78%, rgb(23,159,201) 56%, rgb(31,168,209) 14%);
+   background-image: -o-linear-gradient(bottom, rgb(10,147,188) 78%, rgb(23,159,201) 56%, rgb(31,168,209) 14%);
+   background-image: -moz-linear-gradient(bottom, rgb(10,147,188) 78%, rgb(23,159,201) 56%, rgb(31,168,209) 14%);
+   background-image: -webkit-linear-gradient(bottom, rgb(10,147,188) 78%, rgb(23,159,201) 56%, rgb(31,168,209) 14%);
+   background-image: -ms-linear-gradient(bottom, rgb(10,147,188) 78%, rgb(23,159,201) 56%, rgb(31,168,209) 14%);
+
+   background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.78, rgb(10,147,188)),
+	color-stop(0.56, rgb(23,159,201)),
+	color-stop(0.14, rgb(31,168,209))
+   );
+}
+
+#teamRosterTable div.tableRow:nth-child(even){
+   background-color: rgb(238,247,252);
+}
+
+#teamRosterTable div.tableRow:nth-child(odd){
+   background-color: #FFFFFF;
+}
+
+/* Media Queries */
+
+@media only screen and (max-width: 320px) {
+
+   .itemContent{
+      padding: 14px;
+   }
+
+   .tableItem{
+      vertical-align: top;
+   }
+
+   .tableItem.teamMember{
+      width: 45%;
+   }
+
+   .tableItem.achievements{
+      display:none;
+   }
+
+   .tableItem.raised{
+      width: 24%;
+      border-left: none;
+   }
+
+   .tableItem.donate{
+      width: 30%;
+      border-left: none;
+   }
+   
+   .tableItem.donate .itemContent{
+      padding: 8px 14px;
+   }
+
+   .tableItem.donate .itemContent button{
+      width: 67px;
+      height: 31px;
+   }
+}
