@@ -1,4 +1,4 @@
-jquery-responsive_TeamRaiser_tables
+jquery-responsive-TeamRaiser-tables
 =============
 Version: 1.0 (17-JUL-2013)
 
