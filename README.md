@@ -34,10 +34,7 @@ $('table.tr_roster').responsiveTeamRaiserTable( {
 `labels` - labels for each column 
 
 
-`sort`
-
-sorts the table in descending order by a participant's amount raised. 
-(default: true)
+`sort` - sorts the table in descending order by a participant's amount raised (default: true)
 
 
 
