@@ -23,9 +23,9 @@ $('table.tr_roster').responsiveTeamRaiserTable();
 
 Options
 -------------
-This plugin also currently supports an (optional) options argument:
+This plugin also currently supports an options argument:
 ```javascript
-$('table.tr_roster').responsiveTeamRaiserTable( {
+$('table.tr_roster').responsiveTeamRaiserTable({
     labels: ['Team Member', 'Badges', 'Raised', '&nbsp'],
     sort: false
 });
