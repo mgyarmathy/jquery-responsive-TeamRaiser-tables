@@ -23,7 +23,7 @@
 .cellContent img {
    display: inline;
    vertical-align: middle;
-   padding-right: 16px;
+   margin-right: 16px;
    height: 26px;
    width: 26px;
 }
@@ -40,7 +40,6 @@
 .tableCell.achievements {
    width: 22%;
    display: inline-block;
-   border-left: 1px solid #FFFFFF;
 }
 
 .tableCell.achievements .cellContent {
@@ -50,13 +49,11 @@
 .tableCell.raised {
    width: 22%;
    display: inline-block;
-   border-left: 1px solid #FFFFFF;
 }
 
 .tableCell.donate {
    width: 25%;
    display: inline-block;
-   border-left: 1px solid #FFFFFF;
    text-align: center;
 }
 
