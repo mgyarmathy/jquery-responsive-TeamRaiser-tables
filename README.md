@@ -23,16 +23,15 @@ $('table.tr_roster').responsiveTeamRaiserTable();
 
 Options
 -------------
-This plugin also currently supports an options argument:
+This plugin also currently supports an (optional) options argument:
 ```javascript
-$('table.tr_roster').responsiveTeamRaiserTable({
+$('table.tr_roster').responsiveTeamRaiserTable( {
     labels: ['Team Member', 'Badges', 'Raised', '&nbsp'],
     sort: false
 });
 ```
 
-`labels` - labels for each column 
-
+`labels` - labels for each of the four table columns 
 
 `sort` - sorts the table in descending order by a participant's amount raised (default: true)
 
