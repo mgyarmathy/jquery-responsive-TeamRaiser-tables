@@ -157,7 +157,7 @@
         // add milestones to each record
         $('.tableCell.name .cellContent img').each(function(i, element) {
            $(element).parent().parent().parent().find('.tableCell.milestones .cellContent')
-                     .html($(element).clone());
+                     .append($(element).clone());
         })
         .remove();
 
