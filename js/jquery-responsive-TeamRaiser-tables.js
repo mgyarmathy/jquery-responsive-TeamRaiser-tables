@@ -30,11 +30,11 @@
         
         //error checking on options
         if(this.options.labels.length != 4){
-            $.error('responsiveTeamRaiserTable - four labels must be specified');
+            console.error('responsiveTeamRaiserTable - four labels must be specified');
         }
         
         if(this.options.order.length != 4){
-            $.error('responsiveTeamRaiserTable - invalid order');
+            console.error('responsiveTeamRaiserTable - invalid order');
         }
         else {
             $(this.options.order).each(function(){
@@ -45,9 +45,9 @@
                     case 'donate':
                         break;
                     default:
-                        $.error( 'responsiveTeamRaiserTable - invalid order: "' + this + '" is not a valid column name. '
-                               + 'options are: "name", "milestones", "amount", or "donate"'
-                               );
+                        console.error( 'responsiveTeamRaiserTable - invalid order: "' + this + '" is not a valid column name. '
+                                     + 'options are: "name", "milestones", "amount", or "donate"'
+                                     );
                         break;
                 }
             });
@@ -57,21 +57,24 @@
     }
 
     Plugin.prototype.init = function() {
-        // Place initialization logic here
-        // You already have access to the DOM element and
-        // the options via the instance, e.g. this.element 
-        // and this.options
         
-        // retrieve records from TR table
         var plugin = this,
             records = [],
             captains = [];
+            
+        // retrieve records from TR table    
         $(plugin.element).find('tbody').find('tr').each(function(i, row) { 
             var n = $(row).find('td')[0].innerHTML;
             var amt = $(row).find('td')[1].innerHTML;
+            var px = getParticipantId($(row).find('a:first').attr('href'));
+            
+            // rows not linked to a participant are removed (such as Team Gifts)
+            if (px == 'null') return;
+            
             records.push({ name: n.substring(3,n.length-2), 
                            amount_display: amt.substring(0,amt.length-3) , 
-                           amount: parseFloat(amt.substring(1,amt.length)) 
+                           amount: parseFloat(amt.substring(1,amt.length)),
+                           id: px
                         });
         });
         
@@ -135,7 +138,13 @@
                         break;
                     case 'donate':      
                         rowContents += '<div class="tableCell donate">'
-                                    +    '<div class="cellContent"><button>Donate</button></div>'
+                                    +    '<div class="cellContent">'
+                                    +      '<a href="Donation2?df_id=[[S42:5910:form-id]]&FR_ID=[[S334:fr_id]]&PROXY_ID=' 
+                                    +          participant.id 
+                                    +          '&PROXY_TYPE=20&[[S42:5910:form-id]].donation=form1">'
+                                    +        '<button>Donate</button>'
+                                    +      '</a>'
+                                    +    '</div>'
                                     + '</div>';
                         break;
                     default:
@@ -179,6 +188,19 @@
                 new Plugin(this, options));
             }
         });
+    }
+    
+    //used to get variables from query string in url
+    function getParticipantId(url){
+        if(url !== undefined){
+            var query = url.split('?')[1];
+           var vars = query.split("&");
+           for (var i=0;i<vars.length;i++) {
+                   var pair = vars[i].split("=");
+                   if(pair[0] == 'px'){return pair[1];}
+           }
+        }
+        return 'null';
     }
 
 })(jQuery, window, document);

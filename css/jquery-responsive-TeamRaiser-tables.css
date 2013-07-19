@@ -1,147 +1,142 @@
 #teamRoster {
-   background-color: rgb(242,251,254);
-   padding-bottom: 20px;
+    background-color: rgb(242,251,254);
 }
 
 #teamRosterTable {
-   width: 100%;
-   margin-left: auto;
-   margin-right: auto;
-   border: 1px solid #D0D9E0;
-   font-size: 13px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #D0D9E0;
+    font-size: 13px;
 }
 
 .tableHeading {
-   font-weight: bold;
-   color: #4C4C4C;
+    font-weight: bold;
 }
 
 .cellContent {
-   padding: 16px;
+    padding: 16px;
 }
 
 .cellContent img {
-   display: inline;
-   vertical-align: middle;
-   margin-right: 16px;
-   height: 26px;
-   width: 26px;
+    display: inline;
+    vertical-align: middle;
+    margin-right: 16px;
+    height: 26px;
+    width: 26px;
 }
 
 .tableCell.name {
-   width: 30%;
-   display: inline-block;
+    width: 30%;
+    display: inline-block;
 }
 
 .tableCell.name a {
-   color: rgb(0,153,215);
+    color: rgb(0,153,215);
 }
 
 .tableCell.milestones {
-   width: 22%;
-   display: inline-block;
-}
-
-.tableCell.milestones .cellContent {
-   padding-left: 26px;
+    width: 22%;
+    display: inline-block;
 }
 
 .tableCell.amount {
-   width: 22%;
-   display: inline-block;
+    width: 22%;
+    display: inline-block;
 }
 
 .tableCell.donate {
-   width: 25%;
-   display: inline-block;
-   text-align: center;
+    width: 25%;
+    display: inline-block;
+    text-align: center;
 }
 
 .tableCell.donate .cellContent button {
-   width: 102px;
-   height: 31px;
-   vertical-align: middle;
-   color: #FFFFFF;
-   border: none;
-   border-radius: 2px;
-   background: rgb(21,156,198); /*old browsers*/
-   background-image: linear-gradient(bottom, rgb(10,147,188) 14%, rgb(23,159,201) 56%, rgb(31,168,209) 78%);
-   background-image: -o-linear-gradient(bottom, rgb(10,147,188) 14%, rgb(23,159,201) 56%, rgb(31,168,209) 78%);
-   background-image: -moz-linear-gradient(bottom, rgb(10,147,188) 14%, rgb(23,159,201) 56%, rgb(31,168,209) 78%);
-   background-image: -webkit-linear-gradient(bottom, rgb(10,147,188) 14%, rgb(23,159,201) 56%, rgb(31,168,209) 78%);
-   background-image: -ms-linear-gradient(bottom, rgb(10,147,188) 14%, rgb(23,159,201) 56%, rgb(31,168,209) 78%);
+    width: 102px;
+    height: 31px;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 2px;
+    background: rgb(21,156,198); /*old browsers*/
+    background-image: linear-gradient(bottom, rgb(10,147,188) 14%, rgb(23,159,201) 56%, rgb(31,168,209) 78%);
+    background-image: -o-linear-gradient(bottom, rgb(10,147,188) 14%, rgb(23,159,201) 56%, rgb(31,168,209) 78%);
+    background-image: -moz-linear-gradient(bottom, rgb(10,147,188) 14%, rgb(23,159,201) 56%, rgb(31,168,209) 78%);
+    background-image: -webkit-linear-gradient(bottom, rgb(10,147,188) 14%, rgb(23,159,201) 56%, rgb(31,168,209) 78%);
+    background-image: -ms-linear-gradient(bottom, rgb(10,147,188) 14%, rgb(23,159,201) 56%, rgb(31,168,209) 78%);
 
-   background-image: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0.14, rgb(10,147,188)),
-	color-stop(0.56, rgb(23,159,201)),
-	color-stop(0.78, rgb(31,168,209))
-   );
+    background-image: -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(0.14, rgb(10,147,188)),
+      color-stop(0.56, rgb(23,159,201)),
+      color-stop(0.78, rgb(31,168,209))
+    );
 }
 
 .tableCell.donate .cellContent button:active{
-   background-image: linear-gradient(bottom, rgb(10,147,188) 78%, rgb(23,159,201) 56%, rgb(31,168,209) 14%);
-   background-image: -o-linear-gradient(bottom, rgb(10,147,188) 78%, rgb(23,159,201) 56%, rgb(31,168,209) 14%);
-   background-image: -moz-linear-gradient(bottom, rgb(10,147,188) 78%, rgb(23,159,201) 56%, rgb(31,168,209) 14%);
-   background-image: -webkit-linear-gradient(bottom, rgb(10,147,188) 78%, rgb(23,159,201) 56%, rgb(31,168,209) 14%);
-   background-image: -ms-linear-gradient(bottom, rgb(10,147,188) 78%, rgb(23,159,201) 56%, rgb(31,168,209) 14%);
+    background-image: linear-gradient(bottom, rgb(10,147,188) 78%, rgb(23,159,201) 56%, rgb(31,168,209) 14%);
+    background-image: -o-linear-gradient(bottom, rgb(10,147,188) 78%, rgb(23,159,201) 56%, rgb(31,168,209) 14%);
+    background-image: -moz-linear-gradient(bottom, rgb(10,147,188) 78%, rgb(23,159,201) 56%, rgb(31,168,209) 14%);
+    background-image: -webkit-linear-gradient(bottom, rgb(10,147,188) 78%, rgb(23,159,201) 56%, rgb(31,168,209) 14%);
+    background-image: -ms-linear-gradient(bottom, rgb(10,147,188) 78%, rgb(23,159,201) 56%, rgb(31,168,209) 14%);
 
-   background-image: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0.78, rgb(10,147,188)),
-	color-stop(0.56, rgb(23,159,201)),
-	color-stop(0.14, rgb(31,168,209))
-   );
+    background-image: -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(0.78, rgb(10,147,188)),
+      color-stop(0.56, rgb(23,159,201)),
+      color-stop(0.14, rgb(31,168,209))
+    );
 }
 
 #teamRosterTable div.tableRow:nth-child(even){
-   background-color: rgb(238,247,252);
+    background-color: rgb(238,247,252);
 }
 
 #teamRosterTable div.tableRow:nth-child(odd){
-   background-color: #FFFFFF;
+    background-color: #FFFFFF;
 }
 
 /* Media Queries */
 
 @media only screen and (max-width: 320px) {
 
-   .cellContent{
-      padding: 14px;
-   }
+    .cellContent {
+        padding: 14px;
+    }
 
-   .tableCell{
-      vertical-align: top;
-   }
+    .tableCell {
+        vertical-align: top;
+    }
 
-   .tableCell.name{
-      width: 45%;
-   }
+    .tableCell.name {
+        width: 45%;
+    }
 
-   .tableCell.milestones{
-      display:none;
-   }
+    .tableCell.milestones {
+        display:none;
+    }
 
-   .tableCell.amount{
-      width: 24%;
-      border-left: none;
-   }
+    .tableCell.amount {
+        width: 24%;
+        border-left: none;
+    }
 
-   .tableCell.donate{
-      width: 30%;
-      border-left: none;
-   }
-   
-   .tableCell.donate .cellContent{
-      padding: 8px 14px;
-   }
+    .tableCell.donate {
+        width: 30%;
+        border-left: none;
+    }
 
-   .tableCell.donate .cellContent button{
-      width: 67px;
-      height: 31px;
-   }
+    .tableCell.donate .cellContent {
+        padding: 8px 14px;
+    }
+
+    .tableCell.donate .cellContent button {
+        width: 67px;
+        height: 31px;
+    }
 }
