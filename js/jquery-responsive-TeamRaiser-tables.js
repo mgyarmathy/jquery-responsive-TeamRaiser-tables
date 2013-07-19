@@ -1,5 +1,5 @@
 /*!
- *  Responsive TeamRaiser Tables - version 1.0
+ *  Responsive TeamRaiser Tables - version 1.1
  *  Michael Gyarmathy, Web Development Intern, Blackbaud
  *  Description: a jQuery Plugin that converts TeamRaiser tables into a
  *               responsive <div> format
@@ -28,9 +28,29 @@
         this._defaults = defaults;
         this._name = pluginName;
         
+        //error checking on options
         if(this.options.labels.length != 4){
-            $.error("responsiveTeamRaiserTable - four labels must be specified");
-            this.options.labels = defaults.labels;
+            $.error('responsiveTeamRaiserTable - four labels must be specified');
+        }
+        
+        if(this.options.order.length != 4){
+            $.error('responsiveTeamRaiserTable - invalid order');
+        }
+        else {
+            $(this.options.order).each(function(){
+                switch(String(this)){
+                    case 'name':
+                    case 'milestones':
+                    case 'amount':
+                    case 'donate':
+                        break;
+                    default:
+                        $.error( 'responsiveTeamRaiserTable - invalid order: "' + this + '" is not a valid column name. '
+                               + 'options are: "name", "milestones", "amount", or "donate"'
+                               );
+                        break;
+                }
+            });
         }
         
         this.init();
@@ -41,10 +61,12 @@
         // You already have access to the DOM element and
         // the options via the instance, e.g. this.element 
         // and this.options
+        
         // retrieve records from TR table
-        var records = [],
+        var plugin = this,
+            records = [],
             captains = [];
-        $(this.element).find('tbody').find('tr').each(function(i, row) { 
+        $(plugin.element).find('tbody').find('tr').each(function(i, row) { 
             var n = $(row).find('td')[0].innerHTML;
             var amt = $(row).find('td')[1].innerHTML;
             records.push({ name: n.substring(3,n.length-2), 
@@ -54,55 +76,78 @@
         });
         
         // sort records
-        if(this.options.sort){
+        if(plugin.options.sort){
             records.sort(function(a,b) {return (b.amount - a.amount)} );
         }
         
         // create div where new table will go
-        $(this.element).before('<div id="teamRosterTable"></div>');   
+        $(plugin.element).before('<div id="teamRosterTable"></div>');   
 
         // create heading for table
-        $('#teamRosterTable').append( '<div class="tableRow tableHeading">'
-                                    +   '<div class="tableCell teamMember">'
-                                    +      '<div class="cellContent">' + this.options.labels[0] + '</div>'
-                                    +   '</div>'
-                                    +   '<div class="tableCell achievements">'
-                                    +      '<div class="cellContent">' + this.options.labels[1] + '</div>'
-                                    +   '</div>'
-                                    +   '<div class="tableCell raised">'
-                                    +      '<div class="cellContent">' + this.options.labels[2] + '</div>'
-                                    +   '</div>'
-                                    +   '<div class="tableCell donate">'
-                                    +      '<div class="cellContent">' + this.options.labels[3] + '</div>'
-                                    +   '</div>'
-                                    + '</div>'
-                                    ); 
+        var headingContents = '';
+        $(plugin.options.order).each(function(i) {
+                switch(String(this)){
+                    case 'name':
+                        headingContents +=  '<div class="tableCell name">'
+                                        +      '<div class="cellContent">' + plugin.options.labels[i] + '</div>'
+                                        +   '</div>'
+                        break;
+                    case 'milestones':  
+                        headingContents +=  '<div class="tableCell milestones">'
+                                        +      '<div class="cellContent">' + plugin.options.labels[i] + '</div>'
+                                        +   '</div>' 
+                        break;
+                    case 'amount':      
+                        headingContents +=  '<div class="tableCell amount">'
+                                        +      '<div class="cellContent">' + plugin.options.labels[i] + '</div>'
+                                        +   '</div>'
+                        break;
+                    case 'donate':      
+                        headingContents +=  '<div class="tableCell donate">'
+                                        +      '<div class="cellContent">' + plugin.options.labels[i] + '</div>'
+                                        +   '</div>'
+                        break;
+                    default:
+                        break;
+                }                                        
+        });
+        $('#teamRosterTable').append( '<div class="tableRow tableHeading">' + headingContents + '</div>');
                                     
         // add sorted records to the table
         $(records).each(function(i, participant) {
-            $('#teamRosterTable').append( '<div class="tableRow">'
-                                        +    '<div class="tableCell teamMember">'
-                                        +       '<div class="cellContent">' + participant.name + '</div>'
-                                        +    '</div>'
-                                        +    '<div class="tableCell achievements">'
-                                        +       '<div class="cellContent">'
-                                        +       '</div>'
-                                        +    '</div>'
-                                        +    '<div class="tableCell raised">'
-                                        +       '<div class="cellContent">' + participant.amount_display + '</div>'
-                                        +    '</div>'
-                                        +    '<div class="tableCell donate">'
-                                        +       '<div class="cellContent">'
-                                        +          '<button>Donate</button>'
-                                        +       '</div>'
-                                        +    '</div>'
-                                        + '</div>'
-                                        );
+            var rowContents = '';
+            $(plugin.options.order).each(function() {
+                switch(String(this)){
+                    case 'name':
+                        rowContents += '<div class="tableCell name">'
+                                    +    '<div class="cellContent">' + participant.name + '</div>'
+                                    + '</div>';
+                        break;
+                    case 'milestones':  
+                        rowContents += '<div class="tableCell milestones">'
+                                    +    '<div class="cellContent"></div>'
+                                    +  '</div>'; 
+                        break;
+                    case 'amount':      
+                        rowContents += '<div class="tableCell amount">'
+                                    +    '<div class="cellContent">' + participant.amount_display + '</div>'
+                                    + '</div>';
+                        break;
+                    case 'donate':      
+                        rowContents += '<div class="tableCell donate">'
+                                    +    '<div class="cellContent"><button>Donate</button></div>'
+                                    + '</div>';
+                        break;
+                    default:
+                        break;
+                }                                        
+            });
+            $('#teamRosterTable').append('<div class="tableRow">' + rowContents + '</div>'); 
         });
         
-        // add achievements to each record
-        $('.tableCell.teamMember .cellContent img').each(function(i, element) {
-           $(element).parent().parent().parent().find('.tableCell.achievements .cellContent')
+        // add milestones to each record
+        $('.tableCell.name .cellContent img').each(function(i, element) {
+           $(element).parent().parent().parent().find('.tableCell.milestones .cellContent')
                      .html($(element).clone());
         })
         .remove();
@@ -113,16 +158,16 @@
             captains.push($(element).html());
         });
         $(captains).each(function(i, name) {
-            $('.tableCell.teamMember .cellContent a').each(function(j, element) {
+            $('.tableCell.name .cellContent a').each(function(j, element) {
                 if(element.innerHTML == name){
-                    $(element).parent().parent().parent().find('.tableCell.achievements .cellContent')
+                    $(element).parent().parent().parent().find('.tableCell.milestones .cellContent')
                               .prepend('<img src="img/yellow-star.png" title="Team Captain" />');
                     return false;
                 }
             });
         });
         
-        $(this.element).remove();
+        $(plugin.element).remove();
     };
 
     // A really lightweight plugin wrapper around the constructor, 

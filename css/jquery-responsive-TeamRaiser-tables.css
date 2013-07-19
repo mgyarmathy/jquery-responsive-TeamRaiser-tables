@@ -28,25 +28,25 @@
    width: 26px;
 }
 
-.tableCell.teamMember {
+.tableCell.name {
    width: 30%;
    display: inline-block;
 }
 
-.tableCell.teamMember a {
+.tableCell.name a {
    color: rgb(0,153,215);
 }
 
-.tableCell.achievements {
+.tableCell.milestones {
    width: 22%;
    display: inline-block;
 }
 
-.tableCell.achievements .cellContent {
+.tableCell.milestones .cellContent {
    padding-left: 26px;
 }
 
-.tableCell.raised {
+.tableCell.amount {
    width: 22%;
    display: inline-block;
 }
@@ -118,15 +118,15 @@
       vertical-align: top;
    }
 
-   .tableCell.teamMember{
+   .tableCell.name{
       width: 45%;
    }
 
-   .tableCell.achievements{
+   .tableCell.milestones{
       display:none;
    }
 
-   .tableCell.raised{
+   .tableCell.amount{
       width: 24%;
       border-left: none;
    }

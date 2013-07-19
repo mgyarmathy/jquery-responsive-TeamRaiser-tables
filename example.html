@@ -8,8 +8,9 @@
     <script type="text/javascript">
       $(document).ready(function() {
         $('table.tr_roster').responsiveTeamRaiserTable({
-          labels: ['Player', 'Badges', 'Raised', ''],
-          sort: false
+          labels: ['Player', 'Badges', '', 'Raised'],
+          order: ['name', 'milestones', 'donate', 'amount'],
+          sort: true
         });
       });
     </script>

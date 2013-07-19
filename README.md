@@ -1,6 +1,6 @@
 jquery-responsive-TeamRaiser-tables
 =============
-Version: 1.0 (17-JUL-2013)
+Version: 1.1 (19-JUL-2013)
 
 a jQuery Plugin that converts TeamRaiser tables into a responsive 'div' format
 
@@ -26,12 +26,15 @@ Options
 This plugin also currently supports an (optional) options argument:
 ```javascript
 $('table.tr_roster').responsiveTeamRaiserTable( {
-    labels: ['Team Member', 'Badges', 'Raised', '&nbsp'],
+    labels: ['Badges', 'Team Member', 'Raised', '&nbsp'],
+    order: ['milestones', 'name', 'amount', 'donate'],
     sort: false
 });
 ```
 
 `labels` - labels for each of the four table columns 
+
+`order` - ordering of columns
 
 `sort` - sorts the table in descending order by a participant's amount raised (default: true)
 
