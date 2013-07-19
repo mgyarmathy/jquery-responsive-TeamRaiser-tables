@@ -11,6 +11,7 @@
     var pluginName = 'responsiveTeamRaiserTable',
         defaults = {
             labels: ['Participant', 'Milestones', 'Amount Raised', '&nbsp'],
+            order: ['name', 'milestones', 'amount', 'donate'], 
             sort: true
         };
 
@@ -24,9 +25,13 @@
         // is generally empty because we don't want to alter 
         // the default options for future instances of the plugin
         this.options = $.extend({}, defaults, options) ;
-        
         this._defaults = defaults;
         this._name = pluginName;
+        
+        if(this.options.labels.length != 4){
+            $.error("responsiveTeamRaiserTable - four labels must be specified");
+            this.options.labels = defaults.labels;
+        }
         
         this.init();
     }
