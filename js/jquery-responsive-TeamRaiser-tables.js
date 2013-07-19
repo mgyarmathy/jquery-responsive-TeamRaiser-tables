@@ -116,7 +116,7 @@
             $('.tableCell.teamMember .cellContent a').each(function(j, element) {
                 if(element.innerHTML == name){
                     $(element).parent().parent().parent().find('.tableCell.achievements .cellContent')
-                              .prepend('<img src="img/yellow_star.gif" title="Team Captain" />');
+                              .prepend('<img src="img/yellow-star.png" title="Team Captain" />');
                     return false;
                 }
             });
