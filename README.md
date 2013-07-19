@@ -2,7 +2,7 @@ jquery-responsive-TeamRaiser-tables
 =============
 Version: 1.1 (19-JUL-2013)
 
-a jQuery Plugin that converts TeamRaiser tables into a responsive 'div' format
+a jQuery Plugin that converts TeamRaiser Team page tables into a responsive 'div' format
 
 Usage
 -------------
@@ -32,7 +32,7 @@ $('table.tr_roster').responsiveTeamRaiserTable( {
 });
 ```
 
-`labels` - labels for each of the four table columns 
+`labels` - labels for each of the four table column headings
 
 `order` - ordering of columns
 
