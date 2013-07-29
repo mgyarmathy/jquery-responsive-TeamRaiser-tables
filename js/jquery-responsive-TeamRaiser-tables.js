@@ -12,7 +12,7 @@
         defaults = {
             labels: ['Participant', 'Milestones', 'Amount Raised', '&nbsp'],
             order: ['name', 'milestones', 'amount', 'donate'], 
-            sort: true
+            sort: 'amount'
         };
 
     // The actual plugin constructor
@@ -79,8 +79,11 @@
         });
         
         // sort records
-        if(plugin.options.sort){
-            records.sort(function(a,b) {return (b.amount - a.amount)} );
+        if(plugin.options.sort === 'amount') {
+            records.sort(function(a,b) {return (b.amount - a.amount);} );
+        }
+        else if(plugin.options.sort === 'name') {
+            records.sort(function(a,b) {return (b.name - a.name);} );
         }
         
         // create div where new table will go
