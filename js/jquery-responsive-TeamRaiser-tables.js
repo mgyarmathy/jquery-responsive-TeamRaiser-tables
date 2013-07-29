@@ -1,5 +1,5 @@
 /*!
- *  Responsive TeamRaiser Tables - version 1.1
+ *  Responsive TeamRaiser Tables - version 1.2
  *  Michael Gyarmathy, Web Development Intern, Blackbaud
  *  Description: a jQuery Plugin that converts TeamRaiser tables into a
  *               responsive <div> format
@@ -11,7 +11,8 @@
     var pluginName = 'responsiveTeamRaiserTable',
         defaults = {
             labels: ['Participant', 'Milestones', 'Amount Raised', '&nbsp'],
-            order: ['name', 'milestones', 'amount', 'donate'], 
+            order: ['name', 'milestones', 'amount', 'donate'],
+            tableType: 'team',
             sort: 'amount'
         };
 
@@ -62,28 +63,106 @@
             records = [],
             captains = [];
             
-        // retrieve records from TR table    
-        $(plugin.element).find('tbody').find('tr').each(function(i, row) { 
-            var n = $(row).find('td')[0].innerHTML;
-            var amt = $(row).find('td')[1].innerHTML;
-            var px = getParticipantId($(row).find('a:first').attr('href'));
+        // retrieve records from TR table
+        if (plugin.options.tableType === 'team') {
+            $(plugin.element).find('tbody').find('tr').each(function(i, row) { 
+                var n = $(row).find('td')[0].innerHTML;
+                var amt = $(row).find('td')[1].innerHTML;
+                var px = getParticipantId($(row).find('a:first').attr('href'));
+                
+                // rows not linked to a participant are removed (such as Team Gifts)
+                if (px == 'null') return;
+                
+                records.push({ name: n.substring(3,n.length-2)
+                             , amount_display: amt.substring(0,amt.length-3)
+                             , amount: parseFloat(amt.substring(1,amt.length))
+                             , id: px
+                             }
+                );
+            });
+        }
+        else if (plugin.options.tableType === 'S42') {
             
-            // rows not linked to a participant are removed (such as Team Gifts)
-            if (px == 'null') return;
+            var names = [],
+                ids = [],
+                amountsRaised = [],
+                badges = [],
+                records = [];
+                
+            //gather all of the participant names and ids
+            $(plugin.element).find('a').each(function(i, entry) {
+                names.push($(entry).prop('outerHTML'));
+                ids.push(getParticipantId($(entry).attr('href')));
+            });
+
+            //gather corresponding amounts raised
+            $(plugin.element).contents().filter(function() {
+                return this.nodeType == 3 && this.nodeValue.indexOf('$') > 0;
+            }).wrap('<span class="amountRaised"></span>');
             
-            records.push({ name: n.substring(3,n.length-2), 
-                           amount_display: amt.substring(0,amt.length-3) , 
-                           amount: parseFloat(amt.substring(1,amt.length)),
-                           id: px
-                        });
-        });
+            $('span.amountRaised').each(function(i, entry) {
+                var $amt = $(entry).html();
+                $amt = $amt.replace('&nbsp;', '');
+                $amt = $amt.replace('\(', '');
+                $amt = $amt.replace('\)', '');
+                $amt = $amt.substring(0, $amt.length-3);
+                amountsRaised.push($amt);
+            });
+            
+            //extract badges from each row
+            $(plugin.element).prepend('</br>');
+            $(plugin.element).find('br').each(function() {
+                var $set = $();
+                var nxt = this.nextSibling;
+                while(nxt) {
+                    if (!$(nxt).is('br')) {
+                        $set.push(nxt);
+                        nxt = nxt.nextSibling;
+                    } else break;
+                } 
+               $set.wrapAll('<div class="old-tablerow" />');
+            });
+            
+            $('.old-tablerow').each(function(i) {
+                badges[i] = ""
+                $(this).find('img').each(function() {
+                    badges[i] += this.outerHTML;
+                });
+            });
+            
+            //combine all extracted data
+            $(names).each(function(i) {
+                records.push({ id: ids[i]
+                             , name: names[i]
+                             , amount_display: amountsRaised[i]
+                             , amount: parseInt(amountsRaised[i].substring(1,amountsRaised[i].length))
+                             , badges: badges[i]
+                             }
+                );
+            });
+        }
         
         // sort records
-        if(plugin.options.sort === 'amount') {
-            records.sort(function(a,b) {return (b.amount - a.amount);} );
+        if (plugin.options.sort === 'amount') {
+            records.sort(function(a,b) {
+                return b.amount - a.amount;
+            });
         }
-        else if(plugin.options.sort === 'name') {
-            records.sort(function(a,b) {return (b.name - a.name);} );
+        else if (plugin.options.sort === 'name') {
+            records.sort(function(a,b) {
+                var nameA = a.name;
+                    nameB = b.name;
+                //trim all of the unneccesary tags
+                nameA = nameA.replace(/<[a|A][^>]*>/g, '');
+                nameB = nameB.replace(/<[a|A][^>]*>/g, '');
+                nameA = nameA.replace(/<\/[a|A]>/g, '');
+                nameB = nameB.replace(/<\/[a|A]>/g, '');
+                nameA = nameA.replace(/<[img|IMG][^>]*>/g, '');
+                nameB = nameB.replace(/<[img|IMG][^>]*>/g, '');
+                nameA = nameA.replace(/^[ \t\n]+/g, '');
+                nameB = nameB.replace(/^[ \t\n]+/g, '');
+                return nameA.localeCompare(nameB);
+            });
         }
         
         // create div where new table will go
@@ -123,7 +202,7 @@
         $(records).each(function(i, participant) {
             var rowContents = '';
             $(plugin.options.order).each(function() {
-                switch(String(this)){
+                switch(String(this)) {
                     case 'name':
                         rowContents += '<div class="tableCell name">'
                                     +    '<div class="cellContent">' + participant.name + '</div>'
@@ -131,7 +210,9 @@
                         break;
                     case 'milestones':  
                         rowContents += '<div class="tableCell milestones">'
-                                    +    '<div class="cellContent"></div>'
+                                    +    '<div class="cellContent">'
+                                    +    (plugin.options.tableType === 'S42' ? participant.badges : '')
+                                    +    '</div>'
                                     +  '</div>'; 
                         break;
                     case 'amount':      
@@ -157,27 +238,28 @@
             $('#teamRosterTable').append('<div class="tableRow">' + rowContents + '</div>'); 
         });
         
-        // add milestones to each record
-        $('.tableCell.name .cellContent img').each(function(i, element) {
-           $(element).parent().parent().parent().find('.tableCell.milestones .cellContent')
-                     .append($(element).clone());
-        })
-        .remove();
+        if (plugin.options.tableType === 'team') {
+            // add milestones to each record
+            $('.tableCell.name .cellContent img').each(function(i, element) {
+               $(element).parent().parent().parent().find('.tableCell.milestones .cellContent')
+                         .append($(element).clone());
+            })
+            .remove();
 
-        
-        // assign captain designations
-        $('td.tr_captain a').each(function(i, element) {
-            captains.push($(element).html());
-        });
-        $(captains).each(function(i, name) {
-            $('.tableCell.name .cellContent a').each(function(j, element) {
-                if(element.innerHTML == name){
-                    $(element).parent().parent().parent().find('.tableCell.milestones .cellContent')
-                              .prepend('<img src="img/yellow-star.png" title="Team Captain" />');
-                    return false;
-                }
+            // assign captain designations
+            $('td.tr_captain a').each(function(i, element) {
+                captains.push($(element).html());
             });
-        });
+            $(captains).each(function(i, name) {
+                $('.tableCell.name .cellContent a').each(function(j, element) {
+                    if (element.innerHTML == name) {
+                        $(element).parent().parent().parent().find('.tableCell.milestones .cellContent')
+                                  .prepend('<img src="img/yellow-star.png" title="Team Captain" />');
+                        return false;
+                    }
+                });
+            });
+        }
         
         $(plugin.element).remove();
     };
@@ -193,8 +275,8 @@
         });
     }
     
-    //used to get variables from query string in url
-    function getParticipantId(url){
+    //helper function used to get variables from query string in url
+    function getParticipantId(url) {
         if(url !== undefined){
             var query = url.split('?')[1];
            var vars = query.split("&");
