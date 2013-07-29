@@ -37,6 +37,8 @@ $('table.tr_roster').responsiveTeamRaiserTable( {
 
 `order` - ordering of columns (keywords: 'name', 'milestones', 'amount', and 'donate')
 
+`tableType` - which type of table is being selected ('team' or 'S42' / default: 'team')
+
 `sort` - sorts the table in descending order by a participant's amount raised ('amount', 'name', or 'none' / default: 'amount')
 
 
