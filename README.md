@@ -7,15 +7,16 @@ a jQuery Plugin that converts TeamRaiser tables into a responsive 'div' format
 Usage
 -------------
 
-### Within Luminate Online
+### General Use
 
-Create a reusable pagebuilder page with a single HTML component containing the plugin's Javascript/CSS 
-(wrapping each in their respective tags). Also include a jQuery CDN if needed. Name the 
-page something that is easy to remember, such as **plugin_jquery_responsive_TeamRaiser_tables**.
-
-On the page using the plugin, pull in the content of your reusable using the S51 tag:
+Include the javascript file after jQuery:
 ```html
-[[S51:plugin_jquery_responsive_TeamRaiser_tables:false]]
+<script type="text/javascript" src="jquery-responsive-TeamRaiser-tables.js"></script>
+```
+
+Also include the provided stylesheet file:
+```html
+<link rel="stylesheet" href="jquery-responsive-TeamRaiser-tables.css">
 ```
 
 Select your TeamRaiser table and voilà!
@@ -35,17 +36,15 @@ $('#S42').responsiveTeamRaiserTable({
 });
 ```
 
+### Via PageBuilder Reusables
 
-### Non-Luminate pages
+Create a reusable pagebuilder page with a single HTML component containing the plugin's Javascript/CSS 
+(wrapping each in their respective tags). Also include a jQuery CDN if needed. Name the 
+page something that is easy to remember, such as **plugin_jquery_responsive_TeamRaiser_tables**.
 
-Include the javascript file after jQuery:
+On the page using the plugin, pull in the content of your reusable using the S51 tag:
 ```html
-<script type="text/javascript" src="jquery-responsive-TeamRaiser-tables.js"></script>
-```
-
-Also include the provided stylesheet file:
-```html
-<link rel="stylesheet" href="jquery-responsive-TeamRaiser-tables.css">
+[[S51:plugin_jquery_responsive_TeamRaiser_tables:false]]
 ```
 
 Select your TeamRaiser table and ker-pow!
